@@ -1,0 +1,139 @@
+{% extends 'core/index.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Cool Dogies :D </title>
+    <style>
+body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+        .product-container {
+            
+            display: flex;
+            flex-direction: row; /* Alinea los elementos verticalmente */
+            align-items: center; /* Centra horizontalmente */
+            justify-content: center; /* Centra verticalmente */
+            margin-bottom: 10px; 
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-top: 100px;
+            background-color: rgba(185, 212, 212, 0.226);
+            margin-left: auto;
+        margin-right: auto;
+        box-shadow: 5px 0 10px rgba(0.1, 0.1, 0.1, 0.1), -5px 0 10px rgba(0.1, 0.1, 0.1, 0.1);
+        min-height: 100vh;
+        width: 85%;         
+
+        }
+        
+        .product {
+            width: 350px; 
+            height: 200px;
+            border: 2px solid #1a6b2800; 
+            padding: 15px; 
+            background-size: cover; 
+            margin: 10px; 
+            border-radius: 10px; 
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+            text-align: center; 
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            background-image: url("https://exitocol.vtexassets.com/arquivos/ids/10854724/vinilo-sticker-adhesivo-decorativo-huellitas-dorado.jpg?v=637721552969370000");
+        }
+
+        .additional-info p {
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out; 
+        }
+
+        .additional-info a {
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out; 
+        }
+
+        /* Estilos para .product cuando está en hover */
+        .product:hover {
+            transform: scale(1.05);
+            background-color: rgba(26, 107, 40, 0.356);
+            background-image: url("16a2ff39569179f99d4a1692c440fadc.jpg");
+            opacity: 1;
+        }
+
+        /* Estilos para .additional-info p cuando .product está en hover */
+        .product:hover .additional-info p {
+            opacity: 1;
+        }
+
+        .product:hover .additional-info a {
+            opacity: 1;
+        }
+
+        .product:active{
+            background-color: #060706; /* Cambia el color de fondo a verde */
+        }
+
+        .guarderia {
+        font-size: 30px; /* Puedes ajustar el tamaño según tus necesidades */
+        }
+
+
+        #nombre .container{
+   
+   text-align: center;
+   padding: 30px 100px;
+  background-color: #555555;
+   background-size: cover;
+}
+
+#nombre h2{
+   color: #fcf8f8;
+   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   font-size: 90px;
+   text-shadow: 2px 5px 10px rgba(0, 0, 0, 0.8);
+
+}
+
+.product p{
+    color: #fcf8f8;
+   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   text-shadow: 2px 5px 10px rgba(0, 0, 0, 0.8);
+
+}
+
+    </style>
+</head>
+ 
+<body>
+    <section id="nombre">
+        <div class="container">
+            <h2>guarderias disponibles</h2>
+        </div>
+    </section>
+
+    <div class="product-container">
+        {%for i in products%}
+        <div class="product" ondblclick="toggleInfo(this)">
+            <style>
+            </style>
+            <p class="guarderia", style="color: #050505;">{{i.nombre}}</p>
+                <div class="additional-info">
+                    <p>{{i.telefono}}</p>
+                    <a href={% url 'hacer_reservas' codigo_guarderia=i.codigo %} type="submit">{{i.nombre}}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    
+
+</body>
+
+</html>
+
+{% endblock %}
+

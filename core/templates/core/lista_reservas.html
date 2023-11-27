@@ -1,0 +1,220 @@
+{% extends 'core/index.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de reservas</title>
+
+    <style>
+         body {
+           
+            
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+
+            
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .centrar {
+            text-align: center;
+        }
+
+        #listas{
+            padding: 100px 0px;
+            background-color: rgba(185, 212, 212, 0.226);
+            margin-left: auto;
+        margin-right: auto;
+        box-shadow: 5px 0 10px rgba(0.1, 0.1, 0.1, 0.1), -5px 0 10px rgba(0.1, 0.1, 0.1, 0.1);
+        min-height: 100vh;
+        width: 85%;  
+        }
+
+        a.button{
+    font-size: 2.75em;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 10px;
+    border-radius: 30px;
+    border:2px solid hsl(40, 5%, 11%);
+    color: rgb(9, 9, 9);
+    background-color: rgba(91, 182, 224, 0.61);
+    box-shadow: 5px 5px 5px  rgba(36, 31, 21, 0.427);
+}
+a.button:hover{
+    
+    border:2px solid rgb(60, 138, 255);
+    
+}
+
+#cabeza .container{
+   
+   text-align: center;
+   padding: 1px 100px;
+  background-color: #555555;
+   background-size: cover;
+   margin-top: auto;
+   
+}
+
+#cabeza h2{
+    
+   color: #fcf8f8;
+   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   font-size: 90px;
+   text-shadow: 2px 5px 10px rgba(0, 0, 0, 0.8);
+
+}
+    </style>
+</head>
+<body>
+
+    <section id="cabeza">
+        <div class="container">
+            <h2>tu lista de reservas</h2>
+        </div>
+    </section>
+    <section id="listas">
+        <h2>Lista de reservas en espera</h2>
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Guardería</th>
+                    <th>fecha de entrada</th>
+                    <th>hora de entrada</th>
+                    <th>fecha de salida</th>
+                    <th>hora de salida</th>
+                    <th>Usuario</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+                {% for reserva in reservas_p %}
+                    {% if reserva.usuario == request.user %}
+                    <tr>
+                        <td>{{ reserva.id }}</td>
+                        <td>{{ reserva.guarderia }}</td>
+                        <td>{{ reserva.f_inicio }}</td>
+                        <td>{{ reserva.hora_inicio }}</td>
+                        <td>{{ reserva.f_fin }}</td>
+                        <td>{{ reserva.hora_fin }}</td>
+                        <td>{{ reserva.responsable   }}</td>
+                        <td>{{ reserva.estado }}</td>
+                        <td><a href="{% url 'cancelacion' id_reserva=reserva.id %}" type="submit">Cancelar</a></td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        <h2>Lista de reservas aprobadas</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                    <th>Guardería</th>
+                    <th>fecha de entrada</th>
+                    <th>hora de entrada</th>
+                    <th>fecha de salida</th>
+                    <th>hora de salida</th>
+                    <th>Usuario</th>
+                    <th>Estado</th>
+            </tr>
+            {% for reserva in reservas_a %}
+            {% if reserva.usuario == request.user %}
+                <tr>
+                    <td>{{ reserva.id }}</td>
+                    <td>{{ reserva.guarderia }}</td>
+                    <td>{{ reserva.f_inicio }}</td>
+                    <td>{{ reserva.hora_inicio }}</td>
+                    <td>{{ reserva.f_fin }}</td>
+                    <td>{{ reserva.hora_fin }}</td>
+                    <td>{{ reserva.usuario }}</td>
+                    <td>{{ reserva.estado }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+        <h2>Lista de reservas rechazadas por la guardería</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Guardería</th>
+                <th>fecha de entrada</th>
+                <th>hora de entrada</th>
+                <th>fecha de salida</th>
+                <th>hora de salida</th>
+                <th>Usuario</th>
+                <th>Estado</th>
+            </tr>
+            {% for reserva in reservas_r %}
+            {% if reserva.usuario == request.user %}
+                <tr>
+                    <td>{{ reserva.id }}</td>
+                    <td>{{ reserva.guarderia }}</td>
+                    <td>{{ reserva.f_inicio }}</td>
+                    <td>{{ reserva.hora_inicio }}</td>
+                    <td>{{ reserva.f_fin }}</td>
+                    <td>{{ reserva.hora_fin }}</td>
+                    <td>{{ reserva.usuario }}</td>
+                    <td>{{ reserva.estado }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+        <h2>Lista de reservas canceladas por el cliente</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Guardería</th>
+                <th>fecha de entrada</th>
+                <th>hora de entrada</th>
+                <th>fecha de salida</th>
+                <th>hora de salida</th>
+                <th>Usuario</th>
+                <th>Estado</th>
+            </tr>
+            {% for reserva in reservas_canceladas %}
+            {% if reserva.usuario == request.user %}
+                    <tr>
+                        <td>{{ reserva.id }}</td>
+                        <td>{{ reserva.guarderia }}</td>
+                        <td>{{ reserva.f_inicio }}</td>
+                        <td>{{ reserva.hora_inicio }}</td>
+                        <td>{{ reserva.f_fin }}</td>
+                        <td>{{ reserva.hora_fin }}</td>
+                        <td>{{ reserva.usuario }}</td>
+                        <td>{{ reserva.estado }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href={% url 'list' %} type="submit" class="button">actualizar</a>
+</section>
+
+</body>
+</html>
+
+{% endblock %}

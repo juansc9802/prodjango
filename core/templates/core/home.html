@@ -1,0 +1,179 @@
+{% extends 'core/index.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inicio</title>
+    <style>
+
+*{
+    box-sizing: border-box;
+}
+h1{font-size: 3.5em;}
+h2{font-size: 2.7em;}
+h3{font-size: 2em;}
+p{font-size: 1.25em;}
+ul{list-style: none;}
+li{font-size: 1.5em ;}
+a.button{
+    font-size: 2.75em;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 10px;
+    border-radius: 30px;
+    border:2px solid hsl(40, 5%, 11%);
+    color: rgb(9, 9, 9);
+    background-color: rgba(91, 182, 224, 0.61);
+    box-shadow: 5px 5px 5px  rgba(36, 31, 21, 0.427);
+}
+a.button:hover{
+    
+    border:2px solid rgb(60, 138, 255);
+    
+}
+#principal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    height: 110vh;
+  
+    background-image: url("https://www.kantekpremium.mx/wp-content/uploads/2023/04/guarderia_para_perros.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+#principal h1{
+    color:whitesmoke;
+    font-family:'Times New Roman', Times, serif;
+    text-shadow: 3px  0px 0px black,
+    0px  3px 0px black,
+   -3px  0px 0px black,
+    0px -3px 0px black;
+}
+
+#principal h2{
+    color:rgb(42, 153, 39);
+    background-color: rgba(245, 245, 245, 0.74);
+    padding: 3px 10px;
+    border-radius: 30px;
+
+}
+
+
+#quienesSomos{
+    text-align: center;
+    padding: 100px 150px;
+    background-image: url("https://st2.depositphotos.com/2758786/5754/v/450/depositphotos_57548323-Animal-footprints-seamless-background.jpg");
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
+}
+
+#quienesSomos p{
+    background-color: rgba(245, 245, 245, 0.863);
+    padding: 3px 10px;
+    border-radius: 30px;
+}
+
+#quienesSomos h2{
+    background-color: rgba(245, 245, 245, 0.74);
+    padding: 3px 10px;
+    border-radius: 30px;
+}
+
+#nologin{
+
+    text-align: center;
+    background-color: rgb(58, 58, 58);
+    color: aliceblue;
+    padding-bottom: 15px
+}
+
+    </style>
+
+
+</head>
+<body>
+    {% if request.user.is_authenticated %}
+    <section id="principal">
+        <div class="container">
+        <h1>COOL DOGYS, <br></h1>
+        <h2>hoteles y guarderias caninas en tu ciudad.
+        </h2>
+        <a href={% url 'products' %} class="button">
+            VER GUARDERIAS
+           </a>
+        </div>
+    </section>
+    <section id="quienesSomos">
+        <div class="container">
+            <div class="imagenBonita"></div>
+            <h2><span class="somos" cool dogys>QUIENES SOMOS</span></h2>
+            <p>Nos dedicamos a conectar a las personas y sus queridas mascotas con guarderías y hoteles 
+                caninos en la ciudad de Bogotá. Nuestra plataforma ofrece un completo directorio de 
+                establecimientos que brindan servicios para perros, permitiendo a los usuarios conocer 
+                sus servicios, horarios y disponibilidad de manera rápida y sencilla.
+                <br>
+                <br>
+                Además, ofrecemos la conveniencia de agendar citas y reservar estancias para sus caninos 
+                directamente a través de nuestra plataforma. De esta manera, hacemos que la vida de las 
+                mascotas y sus dueños sea más cómoda y feliz al proporcionarles acceso a un cuidado de calidad 
+                para sus amigos peludos.
+            </p>
+        </div>
+    </section>
+    
+
+    {% else %}
+    
+    <section id="principal">
+        <div class="container">
+        <h1>COOL DOGYS, <br></h1>
+        <h2>hoteles y guarderias caninas en tu ciudad.
+        </h2>
+        <a href={% url 'products' %} class="button">
+         VER GUARDERIAS
+        </a>
+        </div>
+    </section>
+    <section id="quienesSomos">
+        <div class="container">
+            <div class="imagenBonita"></div>
+            <h2><span class="somos" cool dogys>QUIENES SOMOS</span></h2>
+            <p>Nos dedicamos a conectar a las personas y sus queridas mascotas con guarderías y hoteles 
+                caninos en la ciudad de Bogotá. Nuestra plataforma ofrece un completo directorio de 
+                establecimientos que brindan servicios para perros, permitiendo a los usuarios conocer 
+                sus servicios, horarios y disponibilidad de manera rápida y sencilla.
+                <br>
+                <br>
+                Además, ofrecemos la conveniencia de agendar citas y reservar estancias para sus caninos 
+                directamente a través de nuestra plataforma. De esta manera, hacemos que la vida de las 
+                mascotas y sus dueños sea más cómoda y feliz al proporcionarles acceso a un cuidado de calidad 
+                para sus amigos peludos.
+            </p>
+        </div>
+    </section>
+
+    <div>
+        <section id="nologin">
+            <div class="container">
+            <h4>no has iniciado sesion con nosotros.<br></h4>
+            <h4>por favor inicia sesion.
+            </h4>
+            <a href="{% url 'products' %}" class="button">
+             iniciar sesion.
+            </a>
+            </div>
+        </section>
+    </div>
+
+
+
+    {% endif %}
+
+</body>
+</html>
+{% endblock %}

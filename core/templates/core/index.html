@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Dogies</title>
+
+    <style>
+
+body{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    
+   
+}
+    *{
+        box-sizing: border-box;
+    }
+    html{
+        scroll-behavior: smooth;
+    }
+
+
+
+header{
+    background-color: rgba(91, 182, 224, 0.61);
+    position:fixed;
+    width: 100%;
+    z-index: 1000; 
+}
+
+header .container{
+    
+    display: flex;
+    flex-direction:row;
+    align-items:first baseline;
+
+}
+
+header nav{
+    display: flex;
+    flex-direction:row;
+    text-align: center;
+    padding: 8px 0px;
+
+    
+}
+header a{
+    padding: 6px 15px;
+    padding-top: 15px;
+    font-size:25px;
+    text-decoration:wavy;
+    font-weight:initial;
+    color:rgb(255, 253, 253);
+
+}
+header a.navbar-brand{
+    padding: 6px 20px;
+    padding-right: 50px;
+    font-size: 35px;
+    text-decoration:wavy;
+    text-align: center;
+    font-weight: bolder;
+    color:rgb(0, 0, 0);
+
+}
+a.navbar-brand:hover{
+    color: rgb(247, 245, 242);
+    text-shadow: 1px  0px 0px black,
+    0px  1px 0px black,
+   -1px  0px 0px black,
+    0px -1px 0px black;
+
+}
+a:hover{
+    color: rgb(60, 138, 255);
+}
+
+    </style>
+</head>
+<body>
+    <header>
+    <div class = "container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+              <a class="navbar-brand" href={% url 'home' %}>Cool dogies</a>
+                    <a class="nav-link active1" aria-current="page" href={% url 'home' %}>Home</a>
+                    <a class="nav-link active2" aria-current="page" href={% url 'products' %}>guarderias</a>
+
+                    {% if request.user.is_authenticated %}
+                    <a class="nav-link active3" aria-disabled="page" href={% url 'exit' %}>salir</a>
+                    <a class="nav-link active3" aria-disabled="page" href={% url 'list' %}>lista de reservas</a>
+                    {% else %}
+                    <a class="nav-link active3" aria-disabled="page" href={% url 'login' %}>ingresar</a>
+                    <a class="nav-link active3" aria-disabled="page" href={% url 'register' %}>registrarse</a>
+                    {% endif %}
+                </ul>
+          </nav>
+    
+</div>
+</header>
+{% block content %}{% endblock %}
+</body>
+</html>
