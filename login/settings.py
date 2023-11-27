@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['https://cool-doggies.azurewebsites.net','http://127.0.0.1:8000/','cool-doggies.azurewebsites.net']
 
+CSRF_TRUSTED_ORIGINS = ['https://cool-doggies.azurewebsites.net','https://*.127.0.0.1']
 
 # Application definition
 
